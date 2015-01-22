@@ -26,7 +26,7 @@ namespace CelticEgyptianRatscrewKata.Tests
             var rule = new DarkQueenSnapRule();
 
             // WHEN
-            var emptyStack = new Stack(new[]{new Card(Suit.Spades, Rank.Queen), });
+            var queenOfSpadesOnTopStack = new Stack(new[]{new Card(Suit.Spades, Rank.Queen), });
             var containsSnap = rule.ContainsSnap(emptyStack);
 
             // THEN
