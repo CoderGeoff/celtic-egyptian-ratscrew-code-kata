@@ -50,6 +50,7 @@
     <Compile Include="Tests\DarkQueenSnapRuleTests.cs" />
     <Compile Include="Tests\StackTests.cs" />
     <Compile Include="Suit.cs" />
+    <Compile Include="Tests\StandardSnapRuleTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
