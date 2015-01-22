@@ -27,10 +27,29 @@ namespace CelticEgyptianRatscrewKata.Tests
 
             // WHEN
             var queenOfSpadesOnTopStack = new Stack(new[]{new Card(Suit.Spades, Rank.Queen), });
-            var containsSnap = rule.ContainsSnap(emptyStack);
+            var containsSnap = rule.ContainsSnap(queenOfSpadesOnTopStack);
 
             // THEN
             Assert.True(containsSnap);
+        }
+
+        [Test]
+        public void ContainsSnap_IfGivenAStackWithQueenOfSpadesInMiddle_ReturnsFalse()
+        {
+            // GIVEN
+            var rule = new DarkQueenSnapRule();
+
+            // WHEN
+            var stack = new Stack(new[]
+            {
+                new Card(Suit.Spades, Rank.Ace), 
+                new Card(Suit.Spades, Rank.Queen), 
+                new Card(Suit.Spades, Rank.Two)
+            });
+            var containsSnap = rule.ContainsSnap(stack);
+
+            // THEN
+            Assert.False(containsSnap);
         }
     }
 }
