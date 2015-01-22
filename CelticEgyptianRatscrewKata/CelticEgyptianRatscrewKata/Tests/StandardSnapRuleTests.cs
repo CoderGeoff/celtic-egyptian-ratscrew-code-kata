@@ -19,12 +19,4 @@ namespace CelticEgyptianRatscrewKata.Tests
             Assert.False(containsSnap);
         }
     }
-
-    public sealed class StandardSnapRule
-    {
-        public bool ContainsSnap(Stack stack)
-        {
-            return true;
-        }
-    }
 }
