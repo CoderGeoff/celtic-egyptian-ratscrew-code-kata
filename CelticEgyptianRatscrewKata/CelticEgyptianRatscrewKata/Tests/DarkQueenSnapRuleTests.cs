@@ -18,5 +18,19 @@ namespace CelticEgyptianRatscrewKata.Tests
             // THEN
             Assert.False(containsSnap);
         }
+
+        [Test]
+        public void ContainsSnap_IfGivenAStackWithQueenOfSpadesOnTop_ReturnsTrue()
+        {
+            // GIVEN
+            var rule = new DarkQueenSnapRule();
+
+            // WHEN
+            var emptyStack = new Stack(new[]{new Card(Suit.Spades, Rank.Queen), });
+            var containsSnap = rule.ContainsSnap(emptyStack);
+
+            // THEN
+            Assert.True(containsSnap);
+        }
     }
 }
