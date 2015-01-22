@@ -4,7 +4,7 @@
     {
         public bool ContainsSnap(Stack stack)
         {
-            throw new System.NotImplementedException();
+            return false;
         }
     }
 }
