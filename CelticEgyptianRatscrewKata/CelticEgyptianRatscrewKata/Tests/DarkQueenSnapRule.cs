@@ -1,10 +1,17 @@
-﻿namespace CelticEgyptianRatscrewKata.Tests
+﻿using System.Linq;
+
+namespace CelticEgyptianRatscrewKata.Tests
 {
     public sealed class DarkQueenSnapRule
     {
         public bool ContainsSnap(Stack stack)
         {
-            return false;
+            if (!stack.Any())
+            {
+                return false;
+            }
+
+            return stack.First().Equals(new Card(Suit.Spades, Rank.Queen));
         }
     }
 }
