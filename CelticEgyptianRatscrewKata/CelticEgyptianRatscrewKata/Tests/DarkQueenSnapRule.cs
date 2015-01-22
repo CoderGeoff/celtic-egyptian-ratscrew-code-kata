@@ -6,12 +6,7 @@ namespace CelticEgyptianRatscrewKata.Tests
     {
         public bool ContainsSnap(Stack stack)
         {
-            if (!stack.Any())
-            {
-                return false;
-            }
-
-            return stack.First().Equals(new Card(Suit.Spades, Rank.Queen));
+            return new Card(Suit.Spades, Rank.Queen).Equals(stack.FirstOrDefault());
         }
     }
 }
