@@ -19,5 +19,37 @@ namespace CelticEgyptianRatscrewKata.Tests
             // THEN
             Assert.False(canSnap);
         }
+
+        [Test]
+        public void SnapValidator__GivenANonEmptyStackAndAPassingRule_ShouldReturnTrue()
+        {
+            // GIVEN
+            var rules = new IRule[] { new SnapIsNeverValidRule(), new SnapIsAlwaysValidRule() };
+            var validator = new SnapValidator(rules);
+
+            // WHEN
+            var stack = new Stack(new []{new Card(Suit.Clubs, Rank.Ace) });
+            var canSnap = validator.CanSnap(stack);
+
+            // THEN
+            Assert.True(canSnap);
+        }
+
+    }
+
+    public class SnapIsNeverValidRule : IRule
+    {
+        public bool ContainsSnap(Stack stack)
+        {
+            return false;
+        }
+    }
+
+    class SnapIsAlwaysValidRule : IRule
+    {
+        public bool ContainsSnap(Stack stack)
+        {
+            return true;
+        }
     }
 }
