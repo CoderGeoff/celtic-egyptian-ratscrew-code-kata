@@ -37,5 +37,25 @@ namespace CelticEgyptianRatscrewKata.Tests
             Assert.True(containsSnap);
         }
 
+        [Test]
+        public void ContainsSnap_IfGivenAStackWithASandwichSnap_ReturnsFalse()
+        {
+            // GIVEN
+            var rule = new StandardSnapRule();
+
+            // WHEN
+            var stack = new Stack(new[]
+            {
+                new Card(Suit.Clubs, Rank.Ace),
+                new Card(Suit.Clubs, Rank.Two),
+                new Card(Suit.Diamonds, Rank.Ace),
+            });
+            var containsSnap = rule.ContainsSnap(stack);
+
+            // THEN
+            Assert.False(containsSnap);
+        }
+
+
     }
 }
