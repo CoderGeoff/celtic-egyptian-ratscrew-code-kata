@@ -2,7 +2,7 @@
 
 namespace CelticEgyptianRatscrewKata
 {
-    public sealed class StandardSnapRule
+    public sealed class StandardSnapRule : IRule
     {
         public bool ContainsSnap(Stack stack)
         {

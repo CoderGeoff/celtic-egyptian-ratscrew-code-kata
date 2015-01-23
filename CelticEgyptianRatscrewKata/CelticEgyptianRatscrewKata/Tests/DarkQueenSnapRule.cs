@@ -2,7 +2,7 @@
 
 namespace CelticEgyptianRatscrewKata.Tests
 {
-    public sealed class DarkQueenSnapRule
+    public sealed class DarkQueenSnapRule : IRule
     {
         public bool ContainsSnap(Stack stack)
         {

@@ -2,7 +2,7 @@
 
 namespace CelticEgyptianRatscrewKata
 {
-    public class SandwichSnapRule
+    public class SandwichSnapRule : IRule
     {
         public bool ContainsSnap(Stack stackInput)
         {
