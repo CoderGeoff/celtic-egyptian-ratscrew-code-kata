@@ -9,7 +9,7 @@ namespace CelticEgyptianRatscrewKata.Tests
         public void SnapValidator__GivenAnEmptyStack_ShouldReturnFalse()
         {
             // GIVEN
-            var rules = new IRule[] {new StandardSnapRule(), new SandwichSnapRule(), new DarkQueenSnapRule()};
+            var rules = new IRule[] { new SnapIsNeverValidRule(), new SnapIsAlwaysValidRule() };
             var validator = new SnapValidator(rules);
 
             // WHEN
