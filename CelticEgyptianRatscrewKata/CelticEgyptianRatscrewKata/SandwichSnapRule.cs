@@ -1,17 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace CelticEgyptianRatscrewKata
 {
     public class SandwichSnapRule
     {
-        public bool ContainsSnap(Stack stack)
+        public bool ContainsSnap(Stack stackInput)
         {
-            var cards = stack.ToList();
-            var everythingButTheFirstTwoCards = stack.Skip(2).ToList();
-
-            return cards.Zip(everythingButTheFirstTwoCards, (c1, c2) => new Tuple<Card, Card>(c1, c2))
-                        .Any(t => t.Item1.HasSameRank(t.Item2));
+            var stack = stackInput.ToList();
+            return stack.AnyCorrespondingCardsInTwoStacksWhere(stack.Skip(2), t => t.Item1.HasSameRank(t.Item2));
         }
     }
 }
