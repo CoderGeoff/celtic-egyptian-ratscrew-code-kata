@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rank.cs" />
     <Compile Include="SandwichSnapRule.cs" />
+    <Compile Include="SnapValidator.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="StandardSnapRule.cs" />
     <Compile Include="Tests\DarkQueenSnapRule.cs" />

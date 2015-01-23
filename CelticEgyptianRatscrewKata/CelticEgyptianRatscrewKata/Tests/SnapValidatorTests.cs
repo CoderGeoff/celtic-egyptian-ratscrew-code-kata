@@ -21,12 +21,4 @@ namespace CelticEgyptianRatscrewKata.Tests
 
         }
     }
-
-    public class SnapValidator
-    {
-        public bool CanSnap(Stack stack)
-        {
-            return false;
-        }
-    }
 }
