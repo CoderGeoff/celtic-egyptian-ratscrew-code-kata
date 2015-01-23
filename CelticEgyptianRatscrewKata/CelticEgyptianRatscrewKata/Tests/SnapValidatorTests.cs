@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
@@ -25,7 +26,7 @@ namespace CelticEgyptianRatscrewKata.Tests
     {
         public bool CanSnap(Stack stack)
         {
-            return true;
+            return false;
         }
     }
 }
