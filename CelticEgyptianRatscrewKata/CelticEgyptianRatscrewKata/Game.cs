@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CelticEgyptianRatscrewKata
 {
@@ -6,7 +7,10 @@ namespace CelticEgyptianRatscrewKata
     {
         public Game(IEnumerable<Player> players)
         {
-            throw new NoPlayerException();
+            if (players == null || !players.Any())
+            {
+                throw new NoPlayerException();
+            }
         }
     }
 }
