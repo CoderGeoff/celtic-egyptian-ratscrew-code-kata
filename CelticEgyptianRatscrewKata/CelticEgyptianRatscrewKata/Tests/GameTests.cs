@@ -17,5 +17,11 @@ namespace CelticEgyptianRatscrewKata.Tests
             Assert.Throws<NoPlayerException>(() => new Game(null));
         }
 
+        [Test]
+        public void Constructor_GivenPlayers_ShouldNotThrow()
+        {
+            Assert.DoesNotThrow(() => new Game(new []{ new Player()}));
+        }
+
     }
 }
