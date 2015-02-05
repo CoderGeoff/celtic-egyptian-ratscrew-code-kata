@@ -6,6 +6,7 @@ namespace CelticEgyptianRatscrewKata
     {
         public Game(IEnumerable<Player> players)
         {
+            throw new NoPlayerException();
         }
     }
 }
