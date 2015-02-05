@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Card.cs" />
     <Compile Include="Cards.cs" />
+    <Compile Include="DarkQueenSnapRule.cs" />
     <Compile Include="Dealer.cs" />
     <Compile Include="CardExtensions.cs" />
     <Compile Include="IEnumerableOfCardExtensions.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Stack.cs" />
     <Compile Include="StandardSnapRule.cs" />
     <Compile Include="Shuffler.cs" />
-    <Compile Include="Tests\DarkQueenSnapRule.cs" />
     <Compile Include="Tests\DarkQueenSnapRuleTests.cs" />
     <Compile Include="Tests\DealerTests.cs" />
     <Compile Include="Tests\SandwichSnapRuleTests.cs" />

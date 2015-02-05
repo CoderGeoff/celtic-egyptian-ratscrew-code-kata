@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace CelticEgyptianRatscrewKata.Tests
+namespace CelticEgyptianRatscrewKata
 {
     public sealed class DarkQueenSnapRule : IRule
     {
