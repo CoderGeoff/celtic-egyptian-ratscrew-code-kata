@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CelticEgyptianRatscrewKata.Rules;
 using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
