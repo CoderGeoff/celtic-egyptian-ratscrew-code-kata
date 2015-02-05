@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CelticEgyptianRatscrewKata.SnapRules;
+﻿using System.Linq;
 using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
@@ -7,37 +6,36 @@ namespace CelticEgyptianRatscrewKata.Tests
     public class SandwichSnapRuleTests
     {
         [Test]
-        public void ShouldFailOnEmptyStack()
+        public void ContainsSnap_IfGivenAnEmptyStack_ReturnsFalse()
         {
+            // GIVEN
             var rule = new SandwichSnapRule();
-            var stack = Cards.Empty();
-            Assert.That(rule.CanSnap(stack), Is.False);
+
+            // WHEN
+            var emptyStack = new Stack(Enumerable.Empty<Card>());
+            var containsSnap = rule.ContainsSnap(emptyStack);
+
+            // THEN
+            Assert.False(containsSnap);
         }
 
         [Test]
-        public void ShouldFailWithSandwichInStack()
+        public void ContainsSnap_IfGivenASandwichSnapStack_ReturnsTrue()
         {
+            // GIVEN
             var rule = new SandwichSnapRule();
-            var stack = new Cards(new List<Card>
-            {
-                new Card(Suit.Clubs, Rank.Ace),
-                new Card(Suit.Clubs, Rank.Two),
-                new Card(Suit.Clubs, Rank.Three),
-            });
-            Assert.That(rule.CanSnap(stack), Is.False);
-        }
 
-        [Test]
-        public void ShouldPassWithSandwichInStack()
-        {
-            var rule = new SandwichSnapRule();
-            var stack = new Cards(new List<Card>
-            {
-                new Card(Suit.Clubs, Rank.Ace),
-                new Card(Suit.Clubs, Rank.Two),
-                new Card(Suit.Spades, Rank.Ace),
-            });
-            Assert.That(rule.CanSnap(stack), Is.True);
+            // WHEN
+            var stack = new Stack(new []
+                                        {
+                                            new Card(Suit.Clubs, Rank.Ace), 
+                                            new Card(Suit.Clubs, Rank.Two), 
+                                            new Card(Suit.Diamonds, Rank.Ace)
+                                        });
+            var containsSnap = rule.ContainsSnap(stack);
+
+            // THEN
+            Assert.True(containsSnap);
         }
     }
 }

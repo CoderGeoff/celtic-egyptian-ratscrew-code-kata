@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using CelticEgyptianRatscrewKata.SnapRules;
-using Moq;
+﻿using System.Linq;
 using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
@@ -9,47 +6,50 @@ namespace CelticEgyptianRatscrewKata.Tests
     public class SnapValidatorTests
     {
         [Test]
-        public void ShouldNotBeSnappableIfAllRulesReturnFalse()
+        public void SnapValidator__GivenAnEmptyStack_ShouldReturnFalse()
         {
-            var ruleMock = new Mock<IRule>();
-            ruleMock.Setup(x => x.CanSnap(It.IsAny<Cards>())).Returns(false);
-            var rules = new List<IRule> { ruleMock.Object, ruleMock.Object };
+            // GIVEN
+            var rules = new IRule[] { new SnapIsNeverValidRule() };
+            var validator = new SnapValidator(rules);
 
-            var stack = Cards.Empty();
-            var snapValidator = new SnapValidator();
-            bool canSnap = snapValidator.CanSnap(stack, rules);
+            // WHEN
+            var stack = new Stack(Enumerable.Empty<Card>());
+            bool canSnap = validator.CanSnap(stack);
 
-            Assert.That(canSnap, Is.False);
+            // THEN
+            Assert.False(canSnap);
         }
 
         [Test]
-        public void ShouldBeSnappableIfARuleReturnsTrue()
+        public void SnapValidator__GivenANonEmptyStackAndAPassingRule_ShouldReturnTrue()
         {
-            var falseRuleMock = new Mock<IRule>();
-            var trueRuleMock = new Mock<IRule>();
-            falseRuleMock.Setup(x => x.CanSnap(It.IsAny<Cards>())).Returns(false);
-            trueRuleMock.Setup(x => x.CanSnap(It.IsAny<Cards>())).Returns(true);
-            var rules = new List<IRule> { falseRuleMock.Object, trueRuleMock.Object };
+            // GIVEN
+            var rules = new IRule[] { new SnapIsNeverValidRule(), new SnapIsAlwaysValidRule() };
+            var validator = new SnapValidator(rules);
 
-            var stack = Cards.Empty();
-            var snapValidator = new SnapValidator();
-            bool canSnap = snapValidator.CanSnap(stack, rules);
+            // WHEN
+            var stack = new Stack(new []{new Card(Suit.Clubs, Rank.Ace) });
+            var canSnap = validator.CanSnap(stack);
 
-            Assert.That(canSnap, Is.True);
+            // THEN
+            Assert.True(canSnap);
         }
 
-        [Test]
-        public void ShouldPassStackToRule()
+    }
+
+    public class SnapIsNeverValidRule : IRule
+    {
+        public bool ContainsSnap(Stack stack)
         {
-            var ruleMock = new Mock<IRule>();
-            ruleMock.Setup(x => x.CanSnap(It.IsAny<Cards>())).Returns(false);
-            var rules = new List<IRule> { ruleMock.Object };
+            return false;
+        }
+    }
 
-            var stack = Cards.Empty();
-            var snapValidator = new SnapValidator();
-            snapValidator.CanSnap(stack, rules);
-
-            ruleMock.Verify(r => r.CanSnap(stack), Times.Once());            
+    class SnapIsAlwaysValidRule : IRule
+    {
+        public bool ContainsSnap(Stack stack)
+        {
+            return true;
         }
     }
 }

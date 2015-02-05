@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CelticEgyptianRatscrewKata.SnapRules;
+﻿using System.Linq;
 using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
@@ -7,40 +6,56 @@ namespace CelticEgyptianRatscrewKata.Tests
     public class StandardSnapRuleTests
     {
         [Test]
-        public void ShouldFailOnEmptyStack()
+        public void ContainsSnap_IfGivenAnEmptyStack_ReturnsFalse()
         {
-            var stack = Cards.Empty();
-
+            // GIVEN
             var rule = new StandardSnapRule();
-            Assert.That(rule.CanSnap(stack), Is.False);
+
+            // WHEN
+            var emptyStack = new Stack(Enumerable.Empty<Card>());
+            var containsSnap = rule.ContainsSnap(emptyStack);
+
+            // THEN
+            Assert.False(containsSnap);
         }
 
         [Test]
-        public void ShouldFailIfNoPairFound()
+        public void ContainsSnap_IfGivenAStackWithTwoAdjacentCardsOfSameRank_ReturnsTrue()
         {
-            var stack = new Cards(new List<Card>
+            // GIVEN
+            var rule = new StandardSnapRule();
+
+            // WHEN
+            var stack = new Stack(new[]
             {
                 new Card(Suit.Clubs, Rank.Ace),
-                new Card(Suit.Clubs, Rank.Two),
+                new Card(Suit.Diamonds, Rank.Ace),
             });
+            var containsSnap = rule.ContainsSnap(stack);
 
-            var rule = new StandardSnapRule();
-            Assert.That(rule.CanSnap(stack), Is.False);
+            // THEN
+            Assert.True(containsSnap);
         }
 
         [Test]
-        public void ShouldPassIfPairInStack()
+        public void ContainsSnap_IfGivenAStackWithASandwichSnap_ReturnsFalse()
         {
-            var stack = new Cards(new List<Card>
+            // GIVEN
+            var rule = new StandardSnapRule();
+
+            // WHEN
+            var stack = new Stack(new[]
             {
                 new Card(Suit.Clubs, Rank.Ace),
                 new Card(Suit.Clubs, Rank.Two),
-                new Card(Suit.Diamonds, Rank.Two),
-                new Card(Suit.Clubs, Rank.Three),
+                new Card(Suit.Diamonds, Rank.Ace),
             });
+            var containsSnap = rule.ContainsSnap(stack);
 
-            var rule = new StandardSnapRule();
-            Assert.That(rule.CanSnap(stack), Is.True);
+            // THEN
+            Assert.False(containsSnap);
         }
+
+
     }
 }

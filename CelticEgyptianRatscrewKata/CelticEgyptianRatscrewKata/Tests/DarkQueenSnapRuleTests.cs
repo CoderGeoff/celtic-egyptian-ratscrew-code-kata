@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CelticEgyptianRatscrewKata.SnapRules;
+﻿using System.Linq;
 using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
@@ -7,46 +6,50 @@ namespace CelticEgyptianRatscrewKata.Tests
     public class DarkQueenSnapRuleTests
     {
         [Test]
-        public void ShouldFailOnEmptyStack()
+        public void ContainsSnap_IfGivenAnEmptyStack_ReturnsFalse()
         {
+            // GIVEN
             var rule = new DarkQueenSnapRule();
-            var stack = Cards.Empty();
-            Assert.That(rule.CanSnap(stack), Is.False);
+
+            // WHEN
+            var emptyStack = new Stack(Enumerable.Empty<Card>());
+            var containsSnap = rule.ContainsSnap(emptyStack);
+
+            // THEN
+            Assert.False(containsSnap);
         }
 
         [Test]
-        public void ShouldFailWithQueenNotAtTop()
+        public void ContainsSnap_IfGivenAStackWithQueenOfSpadesOnTop_ReturnsTrue()
         {
+            // GIVEN
             var rule = new DarkQueenSnapRule();
-            var stack = new Cards(new List<Card>
-            {
-                new Card(Suit.Clubs, Rank.Ace),
-                new Card(Suit.Spades, Rank.Queen)
-            });
-            Assert.That(rule.CanSnap(stack), Is.False);
+
+            // WHEN
+            var queenOfSpadesOnTopStack = new Stack(new[]{new Card(Suit.Spades, Rank.Queen), });
+            var containsSnap = rule.ContainsSnap(queenOfSpadesOnTopStack);
+
+            // THEN
+            Assert.True(containsSnap);
         }
 
         [Test]
-        public void ShouldFailWithNoQueenOfSpades()
+        public void ContainsSnap_IfGivenAStackWithQueenOfSpadesInMiddle_ReturnsFalse()
         {
+            // GIVEN
             var rule = new DarkQueenSnapRule();
-            var stack = new Cards(new List<Card>
-            {
-                new Card(Suit.Clubs, Rank.Ace),
-            });
-            Assert.That(rule.CanSnap(stack), Is.False);
-        }
 
-        [Test]
-        public void ShouldPassWithQueenAtTop()
-        {
-            var rule = new DarkQueenSnapRule();
-            var stack = new Cards(new List<Card>
+            // WHEN
+            var stack = new Stack(new[]
             {
-                new Card(Suit.Spades, Rank.Queen),
-                new Card(Suit.Clubs, Rank.Ace)
+                new Card(Suit.Spades, Rank.Ace), 
+                new Card(Suit.Spades, Rank.Queen), 
+                new Card(Suit.Spades, Rank.Two)
             });
-            Assert.That(rule.CanSnap(stack), Is.True);
+            var containsSnap = rule.ContainsSnap(stack);
+
+            // THEN
+            Assert.False(containsSnap);
         }
     }
 }
