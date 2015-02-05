@@ -10,5 +10,12 @@ namespace CelticEgyptianRatscrewKata.Tests
         {
             Assert.Throws<NoPlayerException>(() => new Game(Enumerable.Empty<Player>()));
         }
+
+        [Test]
+        public void Constructor_GivenNullPlayers_ShouldThrow()
+        {
+            Assert.Throws<NoPlayerException>(() => new Game(null));
+        }
+
     }
 }
