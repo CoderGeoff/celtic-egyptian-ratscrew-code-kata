@@ -7,65 +7,65 @@ namespace ConsoleBasedGame
     {
         static void Main(string[] args)
         {
-            GameController game = new GameFactory().Create();
+            GameController gameController = new GameFactory().Create();
 
             var userInterface = new UserInterface();
             IEnumerable<PlayerInfo> playerInfos = userInterface.GetPlayerInfoFromUserLazily();
 
-            IDictionary<char, IPerformAction> consoleInputToGameActionMap = new Dictionary<char, IPerformAction>();
+            IDictionary<char, ICommand> consoleInputToCommandMap = new Dictionary<char, ICommand>();
 
             foreach (PlayerInfo playerInfo in playerInfos)
             {
                 var player = new Player(playerInfo.PlayerName);
                 
-                game.AddPlayer(player);
+                gameController.AddPlayer(player);
 
-                var performSnap = new PerformSnap(player, game);
-                var playCard = new PlayCard(player, game);
+                var attemptSnapCommand = new AttemptSnapCommand(player, gameController);
+                var playCardCommand = new PlayCardCommand(player, gameController);
 
-                consoleInputToGameActionMap.Add(playerInfo.SnapKey, performSnap);
-                consoleInputToGameActionMap.Add(playerInfo.PlayCardKey, playCard);
+                consoleInputToCommandMap.Add(playerInfo.SnapKey, attemptSnapCommand);
+                consoleInputToCommandMap.Add(playerInfo.PlayCardKey, playCardCommand);
             }
 
 
             char userInput;
             while (userInterface.TryReadUserInput(out userInput))
             {
-                IPerformAction action;
-                consoleInputToGameActionMap.TryGetValue(userInput, out action);
+                ICommand command;
+                consoleInputToCommandMap.TryGetValue(userInput, out command);
 
-                if (action != null)
+                if (command != null)
                 {
-                    action.ExecuteAction();
+                    command.Execute();
                 }
             }
         }
     }
 
-    internal class PlayCard : IPerformAction
+    internal class PlayCardCommand : ICommand
     {
-        public PlayCard(Player player, GameController game)
+        public PlayCardCommand(Player player, GameController game)
         {
         }
 
-        public void ExecuteAction()
+        public void Execute()
         {
         }
     }
 
-    internal class PerformSnap : IPerformAction
+    internal class AttemptSnapCommand : ICommand
     {
-        public PerformSnap(Player player, GameController game)
+        public AttemptSnapCommand(Player player, GameController game)
         {
         }
 
-        public void ExecuteAction()
+        public void Execute()
         {
         }
     }
 
-    public interface IPerformAction
+    public interface ICommand
     {
-        void ExecuteAction();
+        void Execute();
     }
 }
