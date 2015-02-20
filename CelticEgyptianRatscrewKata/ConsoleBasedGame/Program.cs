@@ -15,7 +15,7 @@ namespace ConsoleBasedGame
 
             var consoleInputToCommandMap = new Dictionary<char, ICommand>();
 
-            foreach (PlayerInfo playerInfo in playerInfos)
+            foreach (var playerInfo in playerInfos)
             {
                 var player = new Player(playerInfo.PlayerName);
                 
