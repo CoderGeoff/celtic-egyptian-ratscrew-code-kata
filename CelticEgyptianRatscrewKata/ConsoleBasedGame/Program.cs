@@ -6,7 +6,7 @@ namespace ConsoleBasedGame
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var gameController = new GameFactory().Create();
             var userInterface = new UserInterface();
