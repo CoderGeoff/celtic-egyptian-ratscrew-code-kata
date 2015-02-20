@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using CelticEgyptianRatscrewKata.Game;
-using ConsoleBasedGame.Commands;
 
 namespace ConsoleBasedGame
 {
@@ -25,8 +24,7 @@ namespace ConsoleBasedGame
             char userInput;
             while (userInterface.TryReadUserInput(out userInput))
             {
-                ICommand command = consoleInputToCommandMap.GetCommand(userInput);
-                command.Execute();
+                consoleInputToCommandMap.GetCommand(userInput).Execute();
             }
         }
 
