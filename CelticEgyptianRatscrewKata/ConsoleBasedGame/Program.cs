@@ -7,12 +7,12 @@ namespace ConsoleBasedGame
     {
         static void Main(string[] args)
         {
-            GameController gameController = new GameFactory().Create();
+            var gameController = new GameFactory().Create();
 
             var userInterface = new UserInterface();
             IEnumerable<PlayerInfo> playerInfos = userInterface.GetPlayerInfoFromUserLazily();
 
-            IDictionary<char, ICommand> consoleInputToCommandMap = new Dictionary<char, ICommand>();
+            var consoleInputToCommandMap = new Dictionary<char, ICommand>();
 
             foreach (PlayerInfo playerInfo in playerInfos)
             {
