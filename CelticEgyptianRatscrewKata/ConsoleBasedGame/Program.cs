@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CelticEgyptianRatscrewKata.Game;
+using ConsoleBasedGame.Commands;
 
 namespace ConsoleBasedGame
 {
@@ -40,32 +41,5 @@ namespace ConsoleBasedGame
                 }
             }
         }
-    }
-
-    internal class PlayCardCommand : ICommand
-    {
-        public PlayCardCommand(Player player, GameController game)
-        {
-        }
-
-        public void Execute()
-        {
-        }
-    }
-
-    internal class AttemptSnapCommand : ICommand
-    {
-        public AttemptSnapCommand(Player player, GameController game)
-        {
-        }
-
-        public void Execute()
-        {
-        }
-    }
-
-    public interface ICommand
-    {
-        void Execute();
     }
 }
