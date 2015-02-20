@@ -10,34 +10,27 @@ namespace ConsoleBasedGame
         {
             var gameController = new GameFactory().Create();
             var userInterface = new UserInterface();
-            var consoleInputToCommandMap = new Dictionary<char, ICommand>();
+            var consoleInputToCommandMap = new ConsoleInputToCommandMap();
 
             IEnumerable<PlayerInfo> playerInfos = userInterface.GetPlayerInfoFromUserLazily();
-            SetUpPlayers(playerInfos, gameController, consoleInputToCommandMap);
+            SetUpPlayers(playerInfos, gameController);
 
             PlayGame(gameController, userInterface, consoleInputToCommandMap);
         }
 
-        private static void PlayGame(GameController gameController, UserInterface userInterface,
-            Dictionary<char, ICommand> consoleInputToCommandMap)
+        private static void PlayGame(GameController gameController, UserInterface userInterface, ConsoleInputToCommandMap consoleInputToCommandMap)
         {
             gameController.StartGame(GameFactory.CreateFullDeckOfCards());
 
             char userInput;
             while (userInterface.TryReadUserInput(out userInput))
             {
-                ICommand command;
-                consoleInputToCommandMap.TryGetValue(userInput, out command);
-
-                if (command != null)
-                {
-                    command.Execute();
-                }
+                ICommand command = consoleInputToCommandMap.GetCommand(userInput);
+                command.Execute();
             }
         }
 
-        private static void SetUpPlayers(IEnumerable<PlayerInfo> playerInfos, GameController gameController,
-            Dictionary<char, ICommand> consoleInputToCommandMap)
+        private static void SetUpPlayers(IEnumerable<PlayerInfo> playerInfos, GameController gameController)
         {
             foreach (var playerInfo in playerInfos)
             {
@@ -45,11 +38,7 @@ namespace ConsoleBasedGame
 
                 gameController.AddPlayer(player);
 
-                var attemptSnapCommand = new AttemptSnapCommand(player, gameController);
-                var playCardCommand = new PlayCardCommand(player, gameController);
-
-                consoleInputToCommandMap.Add(playerInfo.SnapKey, attemptSnapCommand);
-                consoleInputToCommandMap.Add(playerInfo.PlayCardKey, playCardCommand);
+                ConsoleInputToCommandMap.CreateCommands(gameController, player, playerInfo);
             }
         }
     }
