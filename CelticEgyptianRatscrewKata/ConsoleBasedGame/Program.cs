@@ -28,6 +28,7 @@ namespace ConsoleBasedGame
                 consoleInputToCommandMap.Add(playerInfo.PlayCardKey, playCardCommand);
             }
 
+            gameController.StartGame(GameFactory.CreateFullDeckOfCards());
 
             char userInput;
             while (userInterface.TryReadUserInput(out userInput))
