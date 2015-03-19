@@ -32,7 +32,11 @@ namespace CelticEgyptianRatscrewKata.Tests.SnapRules
             fakeCalledOutRank.GetRank().Returns(Rank.Ace);
             var rule = new CallingOutRule(fakeCalledOutRank);
 
-            var cardStack = new Cards(new List<Card> { new Card(Suit.Clubs, Rank.Ace) });
+            var cardStack = new Cards(new List<Card>
+            {
+                new Card(Suit.Clubs, Rank.Ace),
+                new Card(Suit.Clubs, Rank.Two)
+            });
 
             //ACT
             var result = rule.IsSnapValid(cardStack);
