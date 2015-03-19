@@ -16,4 +16,13 @@
         Queen,
         King
     }
+
+    public static class RankExtensions
+    {
+        public static Rank Next(this Rank rank)
+        {
+            var newRank = rank + 1;
+            return newRank > Rank.King ? Rank.Ace : newRank;
+        }
+    }
 }
