@@ -17,5 +17,19 @@ namespace CelticEgyptianRatscrewKata.Tests
             // THEN
             Assert.That(actualRank, Is.EqualTo(Rank.Ace));
         }
+
+        [Test]
+        public void GetRankReturnsTwo_WhenNextTurnCalledOnce()
+        {
+            // GIVEN 
+            var calledOutRank = new CalledOutRank();
+
+            // WHEN
+            calledOutRank.NextTurn();
+
+            // THEN
+            Assert.That(calledOutRank.GetRank(), Is.EqualTo(Rank.Two));
+            
+        }
     }
 }

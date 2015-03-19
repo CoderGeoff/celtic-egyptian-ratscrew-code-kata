@@ -6,5 +6,9 @@
         {
             return Rank.Ace;
         }
+
+        public void NextTurn()
+        {
+        }
     }
 }
