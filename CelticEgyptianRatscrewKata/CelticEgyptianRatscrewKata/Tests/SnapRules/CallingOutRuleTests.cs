@@ -44,5 +44,27 @@ namespace CelticEgyptianRatscrewKata.Tests.SnapRules
             //ASSERT
             Assert.IsTrue(result);
         }
+
+
+        [Test]
+        public void WheRankOfCardOnTopOfStack_DoesntMatchCalledOutRank_ReturnsFalse()
+        {
+            //ARRANGE
+            var fakeCalledOutRank = Substitute.For<ICalledOutRank>();
+            fakeCalledOutRank.GetRank().Returns(Rank.Two);
+            var rule = new CallingOutRule(fakeCalledOutRank);
+
+            var cardStack = new Cards(new List<Card>
+            {
+                new Card(Suit.Clubs, Rank.Ace),
+                new Card(Suit.Clubs, Rank.Two)
+            });
+
+            //ACT
+            var result = rule.IsSnapValid(cardStack);
+
+            //ASSERT
+            Assert.IsFalse(result);
+        }
     }
 }
