@@ -4,7 +4,7 @@ namespace CelticEgyptianRatscrewKata.SnapRules
     {
         public bool IsSnapValid(Cards cardStack)
         {
-            return true;
+            return false;
         }
     }
 }
