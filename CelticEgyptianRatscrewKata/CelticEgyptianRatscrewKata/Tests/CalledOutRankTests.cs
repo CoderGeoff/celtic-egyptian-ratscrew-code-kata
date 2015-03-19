@@ -15,7 +15,7 @@ namespace CelticEgyptianRatscrewKata.Tests
             var actualRank = calledOutRank.GetRank();
 
             // THEN
-            Assert.AreEqual(actualRank, Is.EqualTo(Rank.Ace));
+            Assert.That(actualRank, Is.EqualTo(Rank.Ace));
         }
     }
 }

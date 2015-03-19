@@ -4,7 +4,7 @@
     {
         public Rank GetRank()
         {
-            throw new System.NotImplementedException();
+            return Rank.Ace;
         }
     }
 }
