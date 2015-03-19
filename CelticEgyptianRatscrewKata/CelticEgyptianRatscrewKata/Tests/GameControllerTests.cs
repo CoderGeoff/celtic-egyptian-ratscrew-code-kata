@@ -23,7 +23,7 @@ namespace CelticEgyptianRatscrewKata.Tests
                 new Dealer(), 
                 new NoneShufflingShuffler(), 
                 penalties, 
-                playerSequence);
+                playerSequence, new CalledOutRank());
 
             var playerA = new Player("playerA");
             gameController.AddPlayer(playerA);
@@ -115,7 +115,7 @@ namespace CelticEgyptianRatscrewKata.Tests
             var dealer = new Dealer();
             var noneShufflingShuffler = new NoneShufflingShuffler();
 
-            return new GameController(gameState, completeSnapValidator, dealer, noneShufflingShuffler, Substitute.For<IPenalties>(), new LaxPlayerSequence());
+            return new GameController(gameState, completeSnapValidator, dealer, noneShufflingShuffler, Substitute.For<IPenalties>(), new LaxPlayerSequence(), new CalledOutRank());
         }
 
         private static ISnapValidator CreateCompleteSnapValidator()

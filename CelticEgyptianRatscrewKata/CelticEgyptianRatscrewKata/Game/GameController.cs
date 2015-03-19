@@ -18,8 +18,9 @@ namespace CelticEgyptianRatscrewKata.Game
         private readonly IGameState _gameState;
         private readonly IPenalties _penalties;
         private readonly IPlayerSequence _playerSequence;
+        private readonly ICalledOutRank _CalledOutRank;
 
-        public GameController(IGameState gameState, ISnapValidator snapValidator, IDealer dealer, IShuffler shuffler, IPenalties penalties, IPlayerSequence playerSequence)
+        public GameController(IGameState gameState, ISnapValidator snapValidator, IDealer dealer, IShuffler shuffler, IPenalties penalties, IPlayerSequence playerSequence, ICalledOutRank calledOutRank)
         {
             _players = new List<IPlayer>();
             _gameState = gameState;
@@ -28,6 +29,7 @@ namespace CelticEgyptianRatscrewKata.Game
             _shuffler = shuffler;
             _penalties = penalties;
             _playerSequence = playerSequence;
+            _CalledOutRank = calledOutRank;
         }
 
         public IEnumerable<IPlayer> Players
