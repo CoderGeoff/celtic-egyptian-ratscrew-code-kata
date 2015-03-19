@@ -1,6 +1,6 @@
 ﻿namespace CelticEgyptianRatscrewKata.Game
 {
-    class CalledOutRank
+    public class CalledOutRank : ICalledOutRank
     {
         private Rank m_CurrentRank = Rank.Ace;
 
